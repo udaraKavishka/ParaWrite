@@ -18,7 +18,7 @@ const TextInput = ({ value, onChange }: TextInputProps) => {
     <Card className="p-6">
       <div className="space-y-3">
         <Label htmlFor="text-input" className="text-base font-medium">
-          Or paste your text here
+          paste your text here
         </Label>
         <Textarea
           id="text-input"

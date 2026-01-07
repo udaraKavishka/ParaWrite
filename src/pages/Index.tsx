@@ -133,7 +133,7 @@ const Index = () => {
               </p>
             </div>
 
-            <FileUpload onFileSelect={handleFileSelect} />
+            {/* <FileUpload onFileSelect={handleFileSelect} /> */}
 
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
