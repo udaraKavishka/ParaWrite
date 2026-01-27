@@ -1,0 +1,8 @@
+{
+  "tasks": {
+    "deploy": "supabase functions deploy parse-pdf"
+  },
+  "imports": {
+    "std/": "https://deno.land/std@0.168.0/"
+  }
+}
