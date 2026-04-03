@@ -90,6 +90,133 @@ Navigate to `http://localhost:8080`
 
 For now, PDF files are processed client-side using the `pdf-parse` library, which works for most text-based PDFs.
 
+## Python extraction backend (Supabase-friendly)
+
+ParaWrite now supports an external Python extraction service for file parsing and retry workflows.
+
+### Supported formats
+
+- PDF
+- DOCX
+- DOC
+- MD
+- MDX
+- TXT
+
+### OCR retry mode for scanned PDFs
+
+When normal PDF extraction fails or text is missing, users can trigger `Retry (OCR)` in the review panel.
+
+Install system OCR binary (required for `pytesseract`):
+
+```bash
+# Ubuntu/Debian
+sudo apt-get update && sudo apt-get install -y tesseract-ocr
+
+# macOS
+brew install tesseract
+```
+
+Then reinstall backend deps:
+
+```bash
+cd backend
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+### Why this backend exists
+
+- Better extraction quality for complex PDFs and mixed document structures.
+- Retry with alternate extraction strategies when users report problems.
+- Show extracted text first so users can edit/confirm before paraphrasing.
+
+### Backend setup
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env
+python app.py
+```
+
+If you see CORS errors in browser console (example: "Access-Control-Allow-Origin missing"):
+
+1. Set `ALLOWED_ORIGINS` in `backend/.env` to include your frontend URL.
+2. Restart backend after changing env.
+3. Verify with:
+
+```bash
+curl -i -X OPTIONS http://localhost:8000/api/extract \
+  -H "Origin: http://localhost:8080" \
+  -H "Access-Control-Request-Method: POST"
+```
+
+Response must include `Access-Control-Allow-Origin`.
+
+### Backend status modes
+
+Set in `backend/.env`:
+
+```env
+BACKEND_MODE=active
+```
+
+Options:
+- `active`: normal service
+- `construction`: reports service as under construction
+
+Header status dot meaning:
+- Green blinking: active
+- Red: not working
+- Amber: currently under construction
+
+### Optional Supabase auth + logging on backend
+
+In `backend/.env`:
+
+```env
+REQUIRE_SUPABASE_AUTH=true
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_ANON_KEY=your-anon-or-publishable-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+- `REQUIRE_SUPABASE_AUTH=true` enforces JWT verification.
+- `SUPABASE_SERVICE_ROLE_KEY` enables extraction metadata logging into `extraction_jobs`.
+
+Apply migration:
+
+```bash
+supabase db push
+```
+
+### Frontend env
+
+Add this to your `.env` file:
+
+```env
+VITE_EXTRACTION_API_URL=http://localhost:8000
+VITE_SUPABASE_URL=your-supabase-project-url
+VITE_SUPABASE_PUBLISHABLE_KEY=your-supabase-anon-key
+VITE_FRONTEND_PORT=8080
+```
+
+`npm run dev` now uses `VITE_FRONTEND_PORT` with strict binding (`strictPort: true`).
+If the port is in use, Vite will fail instead of switching to another port.
+
+### API contract
+
+- `POST /api/extract` (multipart/form-data)
+  - `file` (required)
+  - `retry_mode` (`balanced`, `fast`, `deep`)
+  - `error_reason` (optional)
+  - `previous_method` (optional)
+
+- `GET /api/health`
+
 <!-- If you encounter issues with PDF parsing:
 - Ensure your PDF contains actual text (not scanned images)
 - Try converting to DOCX format for better compatibility
