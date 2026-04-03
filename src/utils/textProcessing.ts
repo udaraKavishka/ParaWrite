@@ -111,7 +111,7 @@ export const splitIntoSentences = (
                                /^[A-Z]/.test(nextChar);
       
       // Check for simple word abbreviations  
-      const wordAbbrevMatch = windowBefore.match(/\b([A-Za-z][A-Za-z\-]+)\.$/);
+      const wordAbbrevMatch = windowBefore.match(/\b([A-Za-z][A-Za-z-]+)\.$/);
       const isWordAbbrev = wordAbbrevMatch && ABBREVIATIONS.has(wordAbbrevMatch[1].toLowerCase() + '.');
       
       // Simple email/URL guard
@@ -212,29 +212,21 @@ export const combineSentences = (sentences: string[]): string => {
  */
 export const parseFile = async (file: File): Promise<string> => {
   const fileType = file.name.split('.').pop()?.toLowerCase();
-  
-  console.log('Parsing file:', file.name, 'Type:', fileType, 'MIME:', file.type);
-  
+
   if (fileType === 'txt') {
     try {
       const text = await file.text();
-      console.log('TXT file parsed, length:', text.length);
       return text;
     } catch (error) {
-      console.error('Error reading TXT file:', error);
       throw new Error('Failed to read TXT file');
     }
   }
   
   if (fileType === 'docx' || fileType === 'doc') {
     try {
-      console.log('Loading mammoth library...');
       const mammoth = await import('mammoth');
-      console.log('Converting file to array buffer...');
       const arrayBuffer = await file.arrayBuffer();
-      console.log('Extracting text from DOCX...');
       const result = await mammoth.extractRawText({ arrayBuffer });
-      console.log('DOCX text extracted, length:', result.value.length);
       
       if (!result.value || result.value.trim().length === 0) {
         throw new Error('No text found in the document');
@@ -242,25 +234,18 @@ export const parseFile = async (file: File): Promise<string> => {
       
       return result.value;
     } catch (error) {
-      console.error('Error parsing DOCX file:', error);
       throw new Error(`Failed to parse DOCX file: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }
   
   if (fileType === 'pdf') {
-    console.log('Processing PDF file...');
-    
     // Client-side PDF parsing with pdf-parse
     try {
-      console.log('Loading pdf-parse library...');
       const { PDFParse } = await import('pdf-parse');
-      console.log('Converting file to array buffer...');
       const arrayBuffer = await file.arrayBuffer();
       const uint8Array = new Uint8Array(arrayBuffer);
-      console.log('Extracting text from PDF with pdf-parse...');
       const parser = new PDFParse({ data: uint8Array });
       const result = await parser.getText();
-      console.log('PDF text extracted, length:', result.text?.length || 0);
       
       if (!result.text || result.text.trim().length === 0) {
         throw new Error('No text found in the PDF');
@@ -268,7 +253,6 @@ export const parseFile = async (file: File): Promise<string> => {
       
       return result.text;
     } catch (clientError) {
-      console.error('PDF parsing failed:', clientError);
       throw new Error(`Failed to parse PDF: ${clientError instanceof Error ? clientError.message : 'Unknown error'}. Try converting to DOCX format.`);
       
       /* SUPABASE FALLBACK - DISABLED FOR NOW (Future Enhancement)

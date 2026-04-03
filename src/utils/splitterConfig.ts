@@ -70,7 +70,7 @@ export function splitWithNativeSegmenter(text: string): string[] {
   }
   
   try {
-    // @ts-ignore - Intl.Segmenter may not be in all TypeScript versions
+    // @ts-expect-error - Intl.Segmenter may not be in all TypeScript versions
     const segmenter = new Intl.Segmenter('en', { granularity: 'sentence' });
     const segments = segmenter.segment(text);
     

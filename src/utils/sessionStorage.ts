@@ -7,6 +7,10 @@ import { EditorState, SentenceState, ParagraphInfo } from '@/types/sentence';
 const STORAGE_KEY = 'parawrite-session';
 const AUTOSAVE_INTERVAL = 30000; // 30 seconds
 
+function isBrowser(): boolean {
+  return typeof window !== 'undefined' && typeof window.localStorage !== 'undefined';
+}
+
 export interface SavedSession {
   sentences: SentenceState[];
   paragraphs: ParagraphInfo[];
@@ -24,6 +28,8 @@ export function saveSession(
   currentIndex: number,
   inputText?: string
 ): void {
+  if (!isBrowser()) return;
+
   try {
     const session: SavedSession = {
       sentences,
@@ -43,6 +49,8 @@ export function saveSession(
  * Load session from localStorage
  */
 export function loadSession(): SavedSession | null {
+  if (!isBrowser()) return null;
+
   try {
     const data = localStorage.getItem(STORAGE_KEY);
     if (!data) return null;
@@ -67,6 +75,8 @@ export function loadSession(): SavedSession | null {
  * Clear saved session
  */
 export function clearSession(): void {
+  if (!isBrowser()) return;
+
   try {
     localStorage.removeItem(STORAGE_KEY);
   } catch (error) {
@@ -90,6 +100,10 @@ export function setupAutosave(
   getCurrentIndex: () => number,
   getInputText?: () => string
 ): () => void {
+  if (!isBrowser()) {
+    return () => undefined;
+  }
+
   const intervalId = setInterval(() => {
     saveSession(
       getSentences(),
