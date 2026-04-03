@@ -1,4 +1,4 @@
-// @ts-ignore - Deno imports are not recognized by TypeScript in VS Code
+// @ts-expect-error - Deno imports are not recognized by TypeScript in this workspace config
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 
 const corsHeaders = {
