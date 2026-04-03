@@ -1,0 +1,5 @@
+Contact: mailto:hello@udaradev.me
+Canonical: https://parawrite.udaradev.me/.well-known/security.txt
+Policy: https://parawrite.udaradev.me/terms
+Preferred-Languages: en
+Expires: 2027-04-03T00:00:00.000Z

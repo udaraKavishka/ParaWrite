@@ -1,0 +1,29 @@
+# ParaWrite
+
+> Canonical URL: https://parawrite.udaradev.me/
+> Last Updated: 2026-04-03
+> Contact: mailto:hello@udaradev.me
+
+ParaWrite is a web-based manual paraphrasing tool for sentence-by-sentence rewriting.
+
+## Key capabilities
+- Upload TXT, DOCX, DOC, and PDF files.
+- Split text into editable sentences while preserving context.
+- Edit sentence-by-sentence with progress tracking.
+- Export output as TXT, DOCX, or Markdown.
+
+## Important limitations
+- ParaWrite does not automatically rewrite full documents without user edits.
+- PDF extraction quality depends on source document structure.
+- Local browser storage may be used for session continuity.
+
+## High-value pages
+- Home: https://parawrite.udaradev.me/
+- About: https://parawrite.udaradev.me/about
+- Use Cases: https://parawrite.udaradev.me/use-cases
+- Version History: https://parawrite.udaradev.me/version-history
+- Privacy: https://parawrite.udaradev.me/privacy
+- Terms: https://parawrite.udaradev.me/terms
+
+## More details
+- Full model context: https://parawrite.udaradev.me/llms-full.txt

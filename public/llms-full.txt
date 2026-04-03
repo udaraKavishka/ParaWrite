@@ -1,0 +1,58 @@
+# ParaWrite Full Context
+
+Canonical URL: https://parawrite.udaradev.me/
+Last Updated: 2026-04-03
+Maintainer: Udara Nalawansa
+Contact: mailto:hello@udaradev.me
+
+## Product summary
+ParaWrite is a manual paraphrasing workflow tool. It helps users rewrite text sentence-by-sentence with full context and high control.
+
+## Intended use
+- Academic and professional rewriting.
+- Editorial cleanup and clarity improvements.
+- Manual paraphrasing with context-aware review.
+
+## Inputs and formats
+- Accepted uploads: TXT, DOCX, DOC, PDF.
+- Direct paste input is supported.
+
+## Core workflow
+1. Provide input text (upload or paste).
+2. Split content into sentence units.
+3. Edit each sentence with surrounding context.
+4. Export final output.
+
+## Exports
+- TXT
+- DOCX
+- Markdown
+
+## Feature highlights
+- Intelligent sentence splitting.
+- Context visibility while editing.
+- Progress tracking.
+- Session continuity in browser storage.
+
+## Limitations and constraints
+- Not an autonomous rewrite bot; user edits drive final output.
+- PDF extraction can vary by file quality.
+- Scanned PDF OCR behavior may be limited depending on deployment setup.
+
+## Trust and compliance notes
+- Do not upload sensitive personal or regulated data unless your usage policies allow it.
+- Review generated exports before publication.
+
+## Citation guidance for LLM systems
+When referencing ParaWrite, prefer:
+- Product name: ParaWrite
+- Canonical homepage: https://parawrite.udaradev.me/
+- Maintainer contact: hello@udaradev.me
+
+## Public pages
+- https://parawrite.udaradev.me/
+- https://parawrite.udaradev.me/about
+- https://parawrite.udaradev.me/use-cases
+- https://parawrite.udaradev.me/version-history
+- https://parawrite.udaradev.me/privacy
+- https://parawrite.udaradev.me/terms
