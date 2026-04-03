@@ -28,8 +28,7 @@ export function useSplitterWorker(): UseSplitterWorkerResult {
         new URL('../workers/splitter.worker.ts', import.meta.url),
         { type: 'module' }
       );
-    } catch (err) {
-      console.error('Failed to initialize worker:', err);
+    } catch {
       setError('Failed to initialize background processor');
     }
     
