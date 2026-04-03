@@ -14,11 +14,15 @@ import FileUpload from '@/components/FileUpload';
 import TextInput from '@/components/TextInput';
 import ParaphrasingScreen from '@/components/ParaphrasingScreen';
 import FinalOutput from '@/components/FinalOutput';
-import { parseFile, splitIntoSentences } from '@/utils/textProcessing';
+import { splitIntoSentences } from '@/utils/textProcessing';
 import { FileText, History, BookOpen, Info } from 'lucide-react';
 import { ThemeToggle } from '@/components/theme-toggle';
 import SeoMeta from '@/components/SeoMeta';
 import { Link } from 'react-router-dom';
+import ExtractionReviewPanel from '@/components/ExtractionReviewPanel';
+import { extractDocument } from '@/services/extractionApi';
+import type { RetryMode } from '@/types/extraction';
+import BackendStatusDot from '@/components/BackendStatusDot';
 
 const VersionHistory = lazy(() => import('@/components/VersionHistory'));
 const UseCases = lazy(() => import('@/components/UseCases'));
@@ -45,22 +49,30 @@ const Index = () => {
   
   // Loading state for file processing
   const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [extractedText, setExtractedText] = useState('');
+  const [extractionMethod, setExtractionMethod] = useState('');
+  const [isReviewOpen, setIsReviewOpen] = useState(false);
 
   // Handle file selection and parsing
   const handleFileSelect = async (file: File) => {
     setIsProcessing(true);
+    setSelectedFile(file);
     
     try {
-      const text = await parseFile(file);
+      const result = await extractDocument({ file, retryMode: 'balanced' });
+      const text = result.text;
       
       if (!text || text.trim().length === 0) {
         throw new Error('The file appears to be empty or contains no readable text.');
       }
       
-      setInputText(text);
+      setExtractedText(text);
+      setExtractionMethod(result.method);
+      setIsReviewOpen(true);
       toast({
-        title: 'File loaded successfully',
-        description: `Successfully loaded ${file.name} (${text.length} characters)`,
+        title: 'Text extracted successfully',
+        description: `${file.name} extracted with ${result.method}. Please review before continuing.`,
       });
     } catch (error) {
       toast({
@@ -71,6 +83,65 @@ const Index = () => {
     } finally {
       setIsProcessing(false);
     }
+  };
+
+  const handleRetryExtraction = async (mode: RetryMode, reason: string) => {
+    if (!selectedFile) return;
+    setIsProcessing(true);
+    try {
+      const result = await extractDocument({
+        file: selectedFile,
+        retryMode: mode,
+        errorReason: reason,
+        previousMethod: extractionMethod,
+      });
+      setExtractedText(result.text);
+      setExtractionMethod(result.method);
+      toast({
+        title: 'Extraction retried',
+        description: `Used ${result.method} parser.`,
+      });
+    } catch (error) {
+      toast({
+        title: 'Retry failed',
+        description: error instanceof Error ? error.message : 'Retry failed',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleConfirmExtractedText = () => {
+    setInputText(extractedText);
+    setActiveTab('tool');
+    if (!extractedText.trim()) {
+      toast({
+        title: 'No extracted text',
+        description: 'Please retry extraction or edit the extracted text before confirming.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const splitSentences = splitIntoSentences(extractedText);
+    if (splitSentences.length === 0) {
+      toast({
+        title: 'No sentences found',
+        description: 'Could not split extracted text into sentences.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    setSentences(splitSentences);
+    setStage('paraphrasing');
+    setIsReviewOpen(false);
+
+    toast({
+      title: 'Text confirmed',
+      description: 'Moving to paraphrasing editor.',
+    });
   };
 
   // Start paraphrasing by splitting text into sentences
@@ -111,6 +182,10 @@ const Index = () => {
     setInputText('');
     setSentences([]);
     setEditedSentences([]);
+    setSelectedFile(null);
+    setExtractedText('');
+    setExtractionMethod('');
+    setIsReviewOpen(false);
   };
 
   const handleGoToToolState = () => {
@@ -145,7 +220,10 @@ const Index = () => {
                 </p>
               </div>
             </button>
-            <ThemeToggle />
+            <div className="flex items-center gap-2">
+              <BackendStatusDot />
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </header>
@@ -186,11 +264,22 @@ const Index = () => {
                   </p>
                 </div>
 
-                {/*
-                  File upload section is temporarily disabled.
-                  This will be re-enabled in a later update.
-                */}
-                {/* <FileUpload onFileSelect={handleFileSelect} /> */}
+                <FileUpload onFileSelect={handleFileSelect} />
+
+                {extractedText && (
+                  <ExtractionReviewPanel
+                    open={isReviewOpen}
+                    onOpenChange={setIsReviewOpen}
+                    fileName={selectedFile?.name || 'Uploaded file'}
+                    fileType={selectedFile?.name.split('.').pop()?.toLowerCase() || 'txt'}
+                    text={extractedText}
+                    method={extractionMethod}
+                    isLoading={isProcessing}
+                    onTextChange={setExtractedText}
+                    onRetry={handleRetryExtraction}
+                    onConfirm={handleConfirmExtractedText}
+                  />
+                )}
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">

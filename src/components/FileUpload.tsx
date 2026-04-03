@@ -23,13 +23,13 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
   const handleFileChange = useCallback((file: File | null) => {
     if (!file) return;
 
-    const allowedTypes = ['txt', 'docx', 'pdf', 'doc'];
+    const allowedTypes = ['txt', 'docx', 'pdf', 'doc', 'md', 'mdx'];
     const fileType = file.name.split('.').pop()?.toLowerCase();
 
     if (!fileType || !allowedTypes.includes(fileType)) {
       toast({
         title: 'Invalid file type',
-        description: 'Please upload a TXT, DOCX, DOC, or PDF file.',
+        description: 'Please upload a TXT, DOCX, DOC, PDF, MD, or MDX file.',
         variant: 'destructive',
       });
       return;
@@ -102,13 +102,13 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
             {isDragging ? 'Drop your file here' : 'Drop your file here or click to browse'}
           </p>
           <p className="text-sm text-muted-foreground mt-1">
-            Supports TXT, DOCX, DOC, and PDF files
+            Supports TXT, DOCX, DOC, PDF, MD, and MDX files
           </p>
         </div>
         <input
           id="file-input"
           type="file"
-          accept=".txt,.docx,.doc,.pdf"
+          accept=".txt,.docx,.doc,.pdf,.md,.mdx"
           className="hidden"
           onChange={(e) => {
             const file = e.target.files?.[0];
