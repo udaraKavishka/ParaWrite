@@ -7,7 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Github, Mail, Globe, Heart, Coffee, Star } from 'lucide-react';
+import { Github, Mail, Heart, Coffee, Star } from 'lucide-react';
+import { AlertCircle, Code, Lightbulb } from 'lucide-react';
+
+const openExternal = (url: string) => {
+  window.open(url, '_blank', 'noopener,noreferrer');
+};
 
 const About = () => {
   return (
@@ -61,7 +66,7 @@ const About = () => {
                 variant="outline"
                 size="sm"
                 className="gap-2"
-                onClick={() => window.open('https://github.com/udaraKavishka/', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/')}
               >
                 <Github className="w-4 h-4" />
                 GitHub Profile
@@ -71,7 +76,7 @@ const About = () => {
                 variant="outline"
                 size="sm"
                 className="gap-2"
-                onClick={() => window.open('https://github.com/udaraKavishka/ParaWrite', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/ParaWrite')}
               >
                 <Github className="w-4 h-4" />
                 Project Repository
@@ -113,7 +118,7 @@ const About = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open('https://github.com/udaraKavishka/ParaWrite/issues/new', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/ParaWrite/issues/new')}
               >
                 Open GitHub Issue
               </Button>
@@ -135,7 +140,7 @@ const About = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open('https://github.com/udaraKavishka/ParaWrite/issues/new', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/ParaWrite/issues/new')}
               >
                 Report Bug
               </Button>
@@ -157,7 +162,7 @@ const About = () => {
               <Button
                 variant="outline"
                 size="sm"
-                onClick={() => window.open('https://github.com/udaraKavishka/ParaWrite/fork', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/ParaWrite/fork')}
               >
                 Fork Repository
               </Button>
@@ -180,7 +185,7 @@ const About = () => {
                 variant="outline"
                 size="sm"
                 className="gap-2"
-                onClick={() => window.open('https://github.com/udaraKavishka/ParaWrite/', '_blank')}
+                onClick={() => openExternal('https://github.com/udaraKavishka/ParaWrite/')}
               >
                 <Star className="w-4 h-4" />
                 Star on GitHub
@@ -219,8 +224,5 @@ const About = () => {
     </div>
   );
 };
-
-// Missing import
-import { AlertCircle, Code, Lightbulb } from 'lucide-react';
 
 export default About;

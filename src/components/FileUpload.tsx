@@ -13,6 +13,8 @@ interface FileUploadProps {
   onFileSelect: (file: File) => void;
 }
 
+const MAX_FILE_SIZE_BYTES = 15 * 1024 * 1024;
+
 const FileUpload = ({ onFileSelect }: FileUploadProps) => {
   const { toast } = useToast();
   const [isDragging, setIsDragging] = useState(false);
@@ -33,7 +35,15 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
       return;
     }
 
-    console.log('File selected:', file.name, 'Type:', file.type, 'Size:', file.size);
+    if (file.size > MAX_FILE_SIZE_BYTES) {
+      toast({
+        title: 'File too large',
+        description: 'Please upload a file smaller than 15MB.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     onFileSelect(file);
   }, [onFileSelect, toast]);
 
