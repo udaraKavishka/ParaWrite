@@ -17,6 +17,17 @@ create policy "Users can read own extraction jobs"
   for select
   using (auth.uid() = user_id);
 
+create policy "Users can insert own extraction jobs"
+  on public.extraction_jobs
+  for insert
+  with check (auth.uid() = user_id);
+
+create policy "Anon insert extraction jobs"
+  on public.extraction_jobs
+  for insert
+  to anon
+  with check (user_id is null);
+
 create policy "Service role can write extraction jobs"
   on public.extraction_jobs
   for insert

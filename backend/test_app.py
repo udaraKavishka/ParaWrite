@@ -30,6 +30,7 @@ def test_extract_txt() -> None:
     assert response.status_code == 200
     payload = response.get_json()
     assert "Hello ParaWrite backend" in payload["text"]
+    assert "storage" in payload
 
 
 def test_extract_no_file_returns_structured_error() -> None:

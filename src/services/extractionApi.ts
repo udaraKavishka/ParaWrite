@@ -8,21 +8,6 @@ import type {
 const API_BASE_URL = import.meta.env.VITE_EXTRACTION_API_URL || 'http://localhost:8000';
 const HEALTH_URL = `${API_BASE_URL}/api/health`;
 
-async function getOptionalAccessToken(): Promise<string | null> {
-  try {
-    const hasSupabaseEnv =
-      Boolean(import.meta.env.VITE_SUPABASE_URL) && Boolean(import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
-
-    if (!hasSupabaseEnv) return null;
-
-    const { supabase } = await import('@/integrations/supabase/client');
-    const { data } = await supabase.auth.getSession();
-    return data.session?.access_token || null;
-  } catch {
-    return null;
-  }
-}
-
 export async function extractDocument(request: ExtractionRequest): Promise<ExtractionResponse> {
   const formData = new FormData();
   formData.append('file', request.file);
@@ -30,13 +15,10 @@ export async function extractDocument(request: ExtractionRequest): Promise<Extra
   formData.append('error_reason', request.errorReason || '');
   formData.append('previous_method', request.previousMethod || '');
 
-  const accessToken = await getOptionalAccessToken();
-
   let response: Response;
   try {
     response = await fetch(`${API_BASE_URL}/api/extract`, {
       method: 'POST',
-      headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : undefined,
       body: formData,
     });
   } catch (error) {

@@ -178,14 +178,13 @@ Header status dot meaning:
 In `backend/.env`:
 
 ```env
-REQUIRE_SUPABASE_AUTH=true
 SUPABASE_URL=https://your-project.supabase.co
 SUPABASE_ANON_KEY=your-anon-or-publishable-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+SUPABASE_PUBLISHABLE_KEY=your-publishable-key
 ```
 
-- `REQUIRE_SUPABASE_AUTH=true` enforces JWT verification.
-- `SUPABASE_SERVICE_ROLE_KEY` enables extraction metadata logging into `extraction_jobs`.
+- Backend now logs extraction metadata to Supabase without requiring authentication.
+- For unauthenticated logging, apply the included `anon` insert policy migration.
 
 Apply migration:
 

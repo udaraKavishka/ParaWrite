@@ -4,7 +4,6 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 
 from extractors import extract_document_text, ExtractionError
-from auth import verify_supabase_token, AuthError
 from supabase_logger import log_extraction_event
 
 BACKEND_DIR = os.path.dirname(__file__)
@@ -83,23 +82,6 @@ def create_app() -> Flask:
                 400,
             )
 
-        try:
-            user_payload = verify_supabase_token(request.headers.get("Authorization"))
-        except AuthError as exc:
-            return (
-                jsonify(
-                    {
-                        "error_code": "AUTH_FAILED",
-                        "message": str(exc),
-                        "details": "Supabase token validation failed.",
-                        "retryable": False,
-                        "suggested_action": "Sign in again and retry.",
-                        "attempts": [],
-                    }
-                ),
-                401,
-            )
-
         retry_mode = (request.form.get("retry_mode") or "auto").strip().lower()
         error_reason = (request.form.get("error_reason") or "").strip()
         previous_method = (request.form.get("previous_method") or "").strip()
@@ -112,8 +94,8 @@ def create_app() -> Flask:
                 previous_method=previous_method,
             )
 
-            log_extraction_event(
-                user_id=(user_payload or {}).get("id"),
+            log_success, log_message = log_extraction_event(
+                user_id=None,
                 file_name=result.get("file_name", ""),
                 file_type=result.get("file_type", ""),
                 method=result.get("method", ""),
@@ -121,6 +103,10 @@ def create_app() -> Flask:
                 error_reason=error_reason,
                 text_length=len(result.get("text", "")),
             )
+            result["storage"] = {
+                "stored": log_success,
+                "message": log_message,
+            }
             return jsonify(result), 200
         except ExtractionError as exc:
             return (

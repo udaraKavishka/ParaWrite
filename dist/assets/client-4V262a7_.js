@@ -1,1 +1,0 @@
-import{c as t}from"./supabase-0u6dG-1t.js";import"./react-vendor-zpXU0jIM.js";import"./mammoth-CqkleIqs.js";const e="",o="",S=t(e,o,{auth:{storage:localStorage,persistSession:!0,autoRefreshToken:!0}});export{S as supabase};
