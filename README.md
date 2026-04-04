@@ -158,6 +158,16 @@ curl -i -X OPTIONS http://localhost:8000/api/extract \
 
 Response must include `Access-Control-Allow-Origin`.
 
+### Production CORS (Cloudflare)
+
+When frontend is served from Cloudflare, set backend `ALLOWED_ORIGINS` to include your public site domains:
+
+```env
+ALLOWED_ORIGINS=https://parawrite.udaradev.me,https://www.parawrite.udaradev.me
+```
+
+Then restart backend service after env updates.
+
 ### Backend status modes
 
 Set in `backend/.env`:
