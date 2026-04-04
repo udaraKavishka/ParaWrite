@@ -19,6 +19,34 @@ export interface VersionUpdate {
 
 export const versionHistory: VersionUpdate[] = [
   {
+    version: "2.1.0",
+    date: "April 2026",
+    title: "Extraction Workflow Upgrade",
+    description: "Introduced a Python-powered extraction backend with review-first workflow, smarter retries, and operational health visibility.",
+    features: [
+      "New Flask extraction backend for PDF, DOCX, DOC, MD, MDX, and TXT ingestion",
+      "Floating extraction review popup with editable extracted text before paraphrasing",
+      "Single smart retry button with automatic strategy progression and user error context",
+      "Find and replace tools inside extraction review to correct text before confirmation",
+      "OCR retry path with pytesseract integration for scanned PDF recovery",
+      "Structured backend error model with detailed codes, actions, and method-attempt diagnostics",
+      "Tiny header backend status indicator with hover details (active/inactive/construction)",
+      "Confirm action now jumps directly into sentence-by-sentence paraphrasing stage"
+    ],
+    improvements: [
+      "Added CORS-aware API diagnostics and clearer frontend extraction failure messaging",
+      "Environment-driven backend mode control and health checks",
+      "Expanded CI to include backend lint, tests, and health smoke validation",
+      "Added local pre-commit lint guard for safer commits"
+    ],
+    metrics: [
+      { label: "Supported Import Formats", value: "6" },
+      { label: "Retry Modes", value: "Auto + OCR" },
+      { label: "Backend Test Status", value: "Passing" },
+      { label: "Health Visibility", value: "Live" }
+    ]
+  },
+  {
     version: "2.0.0",
     date: "January 2026",
     title: "Enterprise-Grade Enhancement",
