@@ -8,12 +8,12 @@ interface PageFooterNavProps {
 const PageFooterNav = ({ pageLabel }: PageFooterNavProps) => {
   return (
     <footer className="border-t border-border mt-10 pt-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <Button asChild variant="outline" size="sm">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <Button asChild variant="outline" size="sm" className="w-full sm:w-auto">
           <Link to="/">Back to Tool</Link>
         </Button>
 
-        <div className="text-sm text-muted-foreground flex flex-wrap items-center gap-3">
+        <div className="text-xs sm:text-sm text-muted-foreground flex flex-wrap items-center gap-x-3 gap-y-2">
           <span className="font-medium">You are here: {pageLabel}</span>
           <span>•</span>
           <Link to="/about" className="hover:text-foreground transition-colors">About</Link>

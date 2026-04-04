@@ -6,12 +6,12 @@ A professional sentence-by-sentence paraphrasing tool with enterprise-grade text
 
 ParaWrite is a modern web application designed to streamline manual paraphrasing. Unlike automated tools, ParaWrite keeps you in control while providing intelligent sentence splitting, context awareness, and professional export options. Built with React, TypeScript, and cutting-edge web technologies, it offers production-ready performance and reliability.
 
-**Current Version:** 2.0.0
+**Current Version:** 2.1.1
 
 ## ✨ Features
 
 ### Core Capabilities
-- **📁 Multi-format Support**: Upload TXT, DOCX, or PDF files
+- **📁 Multi-format Support**: Upload TXT, DOCX, DOC, PDF, MD, and MDX files
 - **✍️ Direct Text Input**: Paste text directly into the application
 - **🔍 Sentence-by-Sentence Editing**: Work through your text systematically with full context
 - **👀 Context Preview**: See previous and next sentences while editing current one
@@ -19,6 +19,8 @@ ParaWrite is a modern web application designed to streamline manual paraphrasing
 - **🎨 Modern UI**: Built with shadcn/ui and Tailwind CSS for a polished experience
 - **📱 Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 - **🗂️ Tabbed Interface**: Easy navigation between Tool, Version History, Use Cases, and About
+- **🧭 Backend Status Dot**: Header indicator with hover details (active/inactive/construction)
+- **📝 Review-First Extraction**: Floating extraction review popup with in-place editing and find/replace
 
 ### 🚀 Enterprise-Grade Features
 
@@ -342,6 +344,14 @@ ParaWrite uses advanced pattern recognition to handle complex text:
 - **Code Splitting** - Lazy loading for faster initial loads
 - **Memoization** - Optimized re-renders with React hooks
 - **localStorage** - Efficient local data persistence
+
+## 🔮 What's Next (In Development)
+
+- AI intent detection for uploaded text before paraphrasing
+- AI identification of repetitive, low-information segments
+- Tone-aware AI recommendations (formal, neutral, concise)
+- AI quality scoring for clarity, coherence, and readability
+- Guided AI suggestions with explicit user approval flow
 
 ## 🛠️ Development
 

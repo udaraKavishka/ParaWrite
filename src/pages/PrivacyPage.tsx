@@ -12,9 +12,9 @@ const PrivacyPage = () => {
         path="/privacy"
       />
       <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Privacy" }]} />
-      <main className="container mx-auto px-4 py-8 max-w-3xl space-y-6">
+      <main className="container mx-auto px-4 py-6 sm:py-8 max-w-3xl space-y-5 sm:space-y-6">
         <header className="space-y-2">
-          <h1 className="text-3xl font-bold">Privacy Policy</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Privacy Policy</h1>
           <p className="text-muted-foreground">Last updated: 2026-04-03</p>
         </header>
 

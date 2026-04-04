@@ -48,7 +48,7 @@ const About = () => {
 
       {/* Developer Info */}
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold">Developer</h2>
+        <h2 className="text-xl sm:text-2xl font-bold">Developer</h2>
         
         <Card>
           <CardHeader>
@@ -100,9 +100,9 @@ const About = () => {
 
       {/* Contact & Contribution */}
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold">Get Involved</h2>
+        <h2 className="text-xl sm:text-2xl font-bold">Get Involved</h2>
         
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
           {/* Feature Requests */}
           <Card>
             <CardHeader>

@@ -106,6 +106,18 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    background-image: none;
+    font-family: "IBM Plex Sans", "Avenir Next", "Segoe UI", sans-serif;
+  }
+}
+
+@layer components {
+  .surface-card {
+    @apply bg-card/85 backdrop-blur supports-[backdrop-filter]:bg-card/75 border border-border/70 rounded-xl shadow-sm;
+  }
+
+  .section-heading {
+    @apply text-xl sm:text-2xl font-semibold tracking-tight;
   }
 }

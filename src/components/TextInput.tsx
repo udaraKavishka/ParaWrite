@@ -15,17 +15,17 @@ interface TextInputProps {
 
 const TextInput = ({ value, onChange }: TextInputProps) => {
   return (
-    <Card className="p-6">
+    <Card className="surface-card p-4 sm:p-6">
       <div className="space-y-3">
         <Label htmlFor="text-input" className="text-base font-medium">
-          paste your text here
+          Paste your text here
         </Label>
         <Textarea
           id="text-input"
           placeholder="Paste your text here to start paraphrasing..."
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="min-h-[200px] resize-y text-base"
+          className="min-h-[180px] sm:min-h-[220px] resize-y text-sm sm:text-base"
         />
       </div>
     </Card>

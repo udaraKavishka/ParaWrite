@@ -6,7 +6,6 @@
 import { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useCases, categories } from '@/data/useCases';
 import { CheckCircle2, AlertCircle, Lightbulb, Code } from 'lucide-react';
 
@@ -42,7 +41,7 @@ const UseCases = () => {
       </div>
 
       {/* Use Cases Grid */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
         {filteredUseCases.map((useCase) => (
           <Card key={useCase.id} className="flex flex-col">
             <CardHeader>
@@ -51,7 +50,7 @@ const UseCases = () => {
                   <Badge variant="secondary" className="mb-2">
                     {useCase.category}
                   </Badge>
-                  <CardTitle className="text-lg">{useCase.title}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg">{useCase.title}</CardTitle>
                 </div>
               </div>
             </CardHeader>

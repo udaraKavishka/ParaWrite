@@ -12,9 +12,9 @@ const TermsPage = () => {
         path="/terms"
       />
       <PageBreadcrumbs items={[{ label: "Home", to: "/" }, { label: "Terms" }]} />
-      <main className="container mx-auto px-4 py-8 max-w-3xl space-y-6">
+      <main className="container mx-auto px-4 py-6 sm:py-8 max-w-3xl space-y-5 sm:space-y-6">
         <header className="space-y-2">
-          <h1 className="text-3xl font-bold">Terms of Use</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold">Terms of Use</h1>
           <p className="text-muted-foreground">Last updated: 2026-04-03</p>
         </header>
 

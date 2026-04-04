@@ -11,7 +11,7 @@ interface PageBreadcrumbsProps {
 
 const PageBreadcrumbs = ({ items }: PageBreadcrumbsProps) => {
   return (
-    <nav aria-label="Breadcrumb" className="container mx-auto px-4 pt-6 text-sm text-muted-foreground">
+    <nav aria-label="Breadcrumb" className="container mx-auto px-4 pt-4 sm:pt-6 text-xs sm:text-sm text-muted-foreground">
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((item, index) => {
           const isLast = index === items.length - 1;

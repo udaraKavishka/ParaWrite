@@ -19,21 +19,22 @@ export interface VersionUpdate {
 
 export const versionHistory: VersionUpdate[] = [
   {
-    version: "2.1.0",
+    version: "2.1.1",
     date: "April 2026",
     title: "Extraction Workflow Upgrade",
-    description: "Introduced a Python-powered extraction backend with review-first workflow, smarter retries, and operational health visibility.",
+    description: "Improved mobile responsiveness across key pages and refined extraction workflow visibility, with AI-focused roadmap updates.",
     features: [
       "New Flask extraction backend for PDF, DOCX, DOC, MD, MDX, and TXT ingestion",
       "Floating extraction review popup with editable extracted text before paraphrasing",
       "Single smart retry button with automatic strategy progression and user error context",
       "Find and replace tools inside extraction review to correct text before confirmation",
-      "OCR retry path with pytesseract integration for scanned PDF recovery",
       "Structured backend error model with detailed codes, actions, and method-attempt diagnostics",
       "Tiny header backend status indicator with hover details (active/inactive/construction)",
       "Confirm action now jumps directly into sentence-by-sentence paraphrasing stage"
     ],
     improvements: [
+      "Mobile-responsive tab layout, header spacing, and footer/link wrapping across pages",
+      "Responsive readability updates for About, Use Cases, Terms, Privacy, and Version History views",
       "Added CORS-aware API diagnostics and clearer frontend extraction failure messaging",
       "Environment-driven backend mode control and health checks",
       "Expanded CI to include backend lint, tests, and health smoke validation",
@@ -41,7 +42,7 @@ export const versionHistory: VersionUpdate[] = [
     ],
     metrics: [
       { label: "Supported Import Formats", value: "6" },
-      { label: "Retry Modes", value: "Auto + OCR" },
+      { label: "Retry Mode", value: "Smart Auto" },
       { label: "Backend Test Status", value: "Passing" },
       { label: "Health Visibility", value: "Live" }
     ]
@@ -136,6 +137,19 @@ export const versionHistory: VersionUpdate[] = [
 ];
 
 export const upcomingFeatures = [
+  {
+    version: "2.2.0",
+    title: "What's Next: AI Assistance",
+    status: "In Development",
+    features: [
+      "AI-assisted text intent detection before paraphrasing",
+      "Automatic AI identification of repetitive/low-signal sentences",
+      "Tone-aware rewrite hints (formal, neutral, concise)",
+      "AI quality scoring for clarity, coherence, and readability",
+      "Section-level AI suggestions with user approval workflow",
+      "AI highlight mode for uncertain or ambiguous phrasing"
+    ]
+  },
   {
     version: "3.0.0",
     title: "SaaS Architecture",

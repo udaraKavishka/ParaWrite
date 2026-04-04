@@ -54,7 +54,7 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
   const isLastSentence = currentIndex === sentences.length - 1;
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
       {/* Progress indicator */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
@@ -68,7 +68,7 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
         <Progress value={progress} className="h-2" />
       </div>
 
-      <Card className="p-6 space-y-6">
+      <Card className="surface-card p-4 sm:p-6 space-y-5 sm:space-y-6">
         {/* Previous sentence for context */}
         {!isFirstSentence && (
           <div className="pb-4 border-b border-border">
@@ -93,8 +93,8 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
           </div>
           
           {/* Original sentence display with highlight */}
-          <div className="p-4 rounded-lg bg-highlight border border-border">
-            <p className="text-base leading-relaxed">
+          <div className="p-3 sm:p-4 rounded-lg bg-highlight border border-border">
+            <p className="text-sm sm:text-base leading-relaxed">
               {sentences[currentIndex]}
             </p>
           </div>
@@ -107,7 +107,7 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
             <Textarea
               value={editedSentences[currentIndex]}
               onChange={(e) => handleSentenceChange(e.target.value)}
-              className="min-h-[120px] text-base"
+              className="min-h-[130px] sm:min-h-[140px] text-sm sm:text-base"
               placeholder="Enter your paraphrased version here..."
             />
           </div>
@@ -127,11 +127,11 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
       </Card>
 
       {/* Navigation buttons */}
-      <div className="flex gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto_auto] gap-3">
         <Button
           variant="outline"
           onClick={onBack}
-          className="flex-1"
+          className="w-full"
         >
           Start Over
         </Button>
@@ -139,14 +139,14 @@ const ParaphrasingScreen = ({ sentences, onComplete, onBack }: ParaphrasingScree
           variant="outline"
           onClick={handlePrevious}
           disabled={isFirstSentence}
-          className="gap-2"
+          className="gap-2 w-full sm:w-auto"
         >
           <ChevronLeft className="w-4 h-4" />
           Previous
         </Button>
         <Button
           onClick={handleNext}
-          className="gap-2"
+          className="gap-2 w-full sm:w-auto"
         >
           {isLastSentence ? 'Complete' : 'Next'}
           {!isLastSentence && <ChevronRight className="w-4 h-4" />}

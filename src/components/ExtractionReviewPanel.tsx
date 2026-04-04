@@ -44,10 +44,10 @@ const ExtractionReviewPanel = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-4 sm:p-6">
         <DialogHeader>
-          <DialogTitle>Review Extracted Text</DialogTitle>
-          <DialogDescription>
+          <DialogTitle className="text-lg sm:text-xl">Review Extracted Text</DialogTitle>
+          <DialogDescription className="text-xs sm:text-sm break-words">
             {fileName} ({fileType.toUpperCase()}) • Method: {method}
           </DialogDescription>
         </DialogHeader>
@@ -60,7 +60,7 @@ const ExtractionReviewPanel = ({
             id="extracted-text"
             value={text}
             onChange={(e) => onTextChange(e.target.value)}
-            className="min-h-[320px] text-base"
+            className="min-h-[260px] sm:min-h-[320px] text-sm sm:text-base"
           />
         </div>
 

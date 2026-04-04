@@ -5,12 +5,10 @@ type DotStatus = 'active' | 'inactive' | 'construction' | 'degraded' | 'checking
 
 const BackendStatusDot = () => {
   const [status, setStatus] = useState<DotStatus>('checking');
-  const [message, setMessage] = useState('Checking extraction backend...');
 
   const refresh = async () => {
     const result = await checkExtractionHealth();
     setStatus((result.status as DotStatus) || (result.ok ? 'active' : 'inactive'));
-    setMessage(result.message);
   };
 
   useEffect(() => {
@@ -33,14 +31,22 @@ const BackendStatusDot = () => {
             : 'bg-red-500';
 
   const pulse = status === 'active' || status === 'checking' ? 'animate-pulse' : '';
+  const statusLabel =
+    status === 'active'
+      ? 'Active'
+      : status === 'construction'
+        ? 'Construction'
+        : status === 'checking'
+          ? 'Active'
+          : 'Inactive';
 
   return (
     <button
       type="button"
       onClick={() => void refresh()}
       className="rounded-full p-1.5 hover:bg-accent/50"
-      title={`${status.toUpperCase()}: ${message}`}
-      aria-label={`Backend status ${status}. ${message}`}
+      title={statusLabel}
+      aria-label={statusLabel}
     >
       <span className={`inline-block h-2.5 w-2.5 rounded-full ${color} ${pulse}`} />
     </button>

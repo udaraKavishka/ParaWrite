@@ -201,26 +201,26 @@ const Index = () => {
         path="/"
       />
       {/* Header */}
-      <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
+      <header className="border-b border-border bg-card/85 backdrop-blur sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4 sm:py-6">
+          <div className="flex items-start sm:items-center justify-between gap-3">
             <button
               type="button"
               onClick={handleGoToToolState}
-              className="flex items-center gap-3 rounded-lg p-1 text-left transition-colors hover:bg-accent/50"
+              className="flex items-center gap-2 sm:gap-3 rounded-lg p-1 text-left transition-colors hover:bg-accent/50 max-w-[80%]"
               aria-label="Go to tool start state"
             >
-              <div className="p-2 rounded-lg bg-primary/10">
-                <FileText className="w-6 h-6 text-primary" />
+              <div className="p-1.5 sm:p-2 rounded-lg bg-primary/10">
+                <FileText className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-foreground">ParaWrite</h1>
-                <p className="text-sm text-muted-foreground">
+                <h1 className="text-lg sm:text-2xl font-bold text-foreground">ParaWrite</h1>
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   Professional sentence-by-sentence paraphrasing tool
                 </p>
               </div>
             </button>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 sm:gap-2">
               <BackendStatusDot />
               <ThemeToggle />
             </div>
@@ -229,9 +229,9 @@ const Index = () => {
       </header>
 
       {/* Main content area */}
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 mb-8">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 h-auto gap-1 mb-6 sm:mb-8 surface-card p-1">
             <TabsTrigger value="tool" className="flex items-center gap-2">
               <FileText className="w-4 h-4" />
               Tool
@@ -254,12 +254,12 @@ const Index = () => {
           <TabsContent value="tool">
             {/* Stage 1: Input (Upload or Paste) */}
             {stage === 'input' && (
-              <div className="max-w-3xl mx-auto space-y-6">
+              <div className="max-w-3xl mx-auto space-y-5 sm:space-y-6">
                 <div className="text-center space-y-2">
-                  <h2 className="text-2xl font-bold text-foreground">
+                  <h2 className="text-xl sm:text-2xl font-bold text-foreground">
                     Get Started
                   </h2>
-                  <p className="text-muted-foreground">
+                  <p className="text-sm sm:text-base text-muted-foreground">
                     Upload a document or paste your text to begin paraphrasing
                   </p>
                 </div>
@@ -299,7 +299,7 @@ const Index = () => {
                     onClick={handleStartParaphrasing}
                     disabled={!inputText.trim() || isProcessing}
                     size="lg"
-                    className="min-w-[200px]"
+                    className="w-full sm:w-auto sm:min-w-[200px]"
                   >
                     {isProcessing ? 'Processing...' : 'Start Paraphrasing'}
                   </Button>
@@ -351,9 +351,11 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border mt-12">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>ParaWrite v2.0.0 - Professional sentence-by-sentence paraphrasing</p>
-            <div className="flex items-center gap-4">
+          <div className="space-y-4 text-sm text-muted-foreground">
+            <p className="text-center sm:text-left text-xs sm:text-sm tracking-wide">
+              ParaWrite v2.1.1 - Professional sentence-by-sentence paraphrasing
+            </p>
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-3 gap-y-1">
               <a
                 href="https://github.com/udaraKavishka/ParaWrite"
                 target="_blank"
@@ -362,31 +364,46 @@ const Index = () => {
               >
                 GitHub
               </a>
-              <span>•</span>
+              <span className="text-border">/</span>
               <a
                 href="mailto:hello@udaradev.me"
                 className="hover:text-foreground transition-colors"
               >
                 Contact
               </a>
-              <span>•</span>
-              <Link to="/about" className="hover:text-foreground transition-colors">
+              <span className="text-border">/</span>
+              <Link
+                to="/about"
+                className="hover:text-foreground transition-colors"
+              >
                 About
               </Link>
-              <span>•</span>
-              <Link to="/use-cases" className="hover:text-foreground transition-colors">
+              <span className="text-border">/</span>
+              <Link
+                to="/use-cases"
+                className="hover:text-foreground transition-colors"
+              >
                 Use Cases
               </Link>
-              <span>•</span>
-              <Link to="/version-history" className="hover:text-foreground transition-colors">
+              <span className="text-border">/</span>
+              <Link
+                to="/version-history"
+                className="hover:text-foreground transition-colors"
+              >
                 Changelog
               </Link>
-              <span>•</span>
-              <Link to="/privacy" className="hover:text-foreground transition-colors">
+              <span className="text-border">/</span>
+              <Link
+                to="/privacy"
+                className="hover:text-foreground transition-colors"
+              >
                 Privacy
               </Link>
-              <span>•</span>
-              <Link to="/terms" className="hover:text-foreground transition-colors">
+              <span className="text-border">/</span>
+              <Link
+                to="/terms"
+                className="hover:text-foreground transition-colors"
+              >
                 Terms
               </Link>
             </div>

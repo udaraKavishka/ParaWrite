@@ -76,7 +76,7 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
 
   return (
     <Card
-      className={`border-2 border-dashed transition-all cursor-pointer p-12 ${
+      className={`surface-card border-2 border-dashed transition-all cursor-pointer p-6 sm:p-10 ${
         isDragging 
           ? 'border-primary bg-primary/5 scale-105' 
           : 'border-border hover:border-primary hover:bg-accent/50'
@@ -87,7 +87,7 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
       onDragLeave={handleDragLeave}
       onClick={() => document.getElementById('file-input')?.click()}
     >
-      <div className="flex flex-col items-center justify-center gap-4 text-center">
+      <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 text-center">
         <div className={`p-4 rounded-full transition-all ${
           isDragging ? 'bg-primary/20' : 'bg-primary/10'
         }`}>
@@ -98,7 +98,7 @@ const FileUpload = ({ onFileSelect }: FileUploadProps) => {
           )}
         </div>
         <div>
-          <p className="text-lg font-medium text-foreground">
+          <p className="text-base sm:text-lg font-medium text-foreground">
             {isDragging ? 'Drop your file here' : 'Drop your file here or click to browse'}
           </p>
           <p className="text-sm text-muted-foreground mt-1">

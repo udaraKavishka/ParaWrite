@@ -14,7 +14,7 @@ const VersionHistory = () => {
     <div className="space-y-8">
       {/* Current and Past Versions */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
           <CheckCircle2 className="w-6 h-6 text-green-500" />
           Released Versions
         </h2>
@@ -24,12 +24,12 @@ const VersionHistory = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <CardTitle className="text-xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <CardTitle className="text-lg sm:text-xl">
                         {version.version} - {version.title}
                       </CardTitle>
                       {index === 0 && (
-                        <Badge variant="default" className="ml-2">
+                        <Badge variant="default" className="ml-0 sm:ml-2">
                           Latest
                         </Badge>
                       )}
@@ -91,13 +91,13 @@ const VersionHistory = () => {
                 {version.metrics && version.metrics.length > 0 && (
                   <div>
                     <h4 className="font-semibold mb-2 text-sm">📊 Key Metrics</h4>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                       {version.metrics.map((metric, idx) => (
                         <div
                           key={idx}
                           className="p-3 rounded-lg bg-muted/50 border border-border"
                         >
-                          <div className="text-2xl font-bold text-primary">{metric.value}</div>
+                          <div className="text-xl sm:text-2xl font-bold text-primary">{metric.value}</div>
                           <div className="text-xs text-muted-foreground">{metric.label}</div>
                         </div>
                       ))}
@@ -114,7 +114,7 @@ const VersionHistory = () => {
 
       {/* Upcoming Features */}
       <div>
-        <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
+        <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center gap-2">
           <Clock className="w-6 h-6 text-orange-500" />
           Roadmap & Upcoming Features
         </h2>
@@ -124,8 +124,8 @@ const VersionHistory = () => {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <CardTitle className="text-xl">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <CardTitle className="text-lg sm:text-xl">
                         {version.version} - {version.title}
                       </CardTitle>
                       <Badge variant="outline" className="ml-2">

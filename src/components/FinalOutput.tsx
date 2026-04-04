@@ -55,10 +55,10 @@ const FinalOutput = ({ editedSentences, onStartOver }: FinalOutputProps) => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
+    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
       {/* Success message */}
       <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold text-foreground">
+        <h2 className="text-2xl sm:text-3xl font-bold text-foreground">
           Paraphrasing Complete! 🎉
         </h2>
         <p className="text-muted-foreground">
@@ -67,34 +67,34 @@ const FinalOutput = ({ editedSentences, onStartOver }: FinalOutputProps) => {
       </div>
 
       {/* Statistics */}
-      <div className="grid grid-cols-3 gap-4">
-        <Card className="p-4 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+        <Card className="surface-card p-4 text-center">
           <p className="text-2xl font-bold text-primary">{editedSentences.length}</p>
           <p className="text-sm text-muted-foreground">Sentences</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="surface-card p-4 text-center">
           <p className="text-2xl font-bold text-primary">{finalText.split(' ').length}</p>
           <p className="text-sm text-muted-foreground">Words</p>
         </Card>
-        <Card className="p-4 text-center">
+        <Card className="surface-card p-4 text-center">
           <p className="text-2xl font-bold text-primary">{finalText.length}</p>
           <p className="text-sm text-muted-foreground">Characters</p>
         </Card>
       </div>
 
       {/* Final text display */}
-      <Card className="p-6">
+      <Card className="surface-card p-4 sm:p-6">
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <h3 className="text-lg font-semibold text-foreground">
               Your Paraphrased Text
             </h3>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-2 gap-2 w-full sm:w-auto">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={handleCopy}
-                className="gap-2"
+                className="gap-2 w-full"
               >
                 <Copy className="w-4 h-4" />
                 Copy
@@ -103,7 +103,7 @@ const FinalOutput = ({ editedSentences, onStartOver }: FinalOutputProps) => {
                 variant="outline"
                 size="sm"
                 onClick={handleDownload}
-                className="gap-2"
+                className="gap-2 w-full"
               >
                 <Download className="w-4 h-4" />
                 Download
@@ -124,7 +124,7 @@ const FinalOutput = ({ editedSentences, onStartOver }: FinalOutputProps) => {
         <Button
           variant="outline"
           onClick={onStartOver}
-          className="gap-2"
+          className="gap-2 w-full sm:w-auto"
         >
           <RotateCcw className="w-4 h-4" />
           Start New Paraphrasing

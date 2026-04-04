@@ -58,7 +58,7 @@ export async function checkExtractionHealth(): Promise<{ ok: boolean; message: s
     const status = payload.status || 'inactive';
     const ok = status === 'active';
 
-    const suffix = payload.checks?.ocr_ready === false ? ` (${payload.checks.ocr_message || 'OCR unavailable'})` : '';
+    const suffix = payload.checks?.ocr_ready === false ? ` (${payload.checks.ocr_message})` : '';
 
     return { ok, status, message: `${payload.message}${suffix}` };
   } catch (error) {
